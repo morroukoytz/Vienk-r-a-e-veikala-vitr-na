@@ -1,0 +1,31 @@
+$ docker compose --env-file .env -f 04_docker/1-7_docker-compose.yml ps
+SERVICE    IMAGE                         STATUS                            PORTS
+backend    ecommerce-catalogue-backend   Up 9 seconds (health: starting)   0.0.0.0:8000->8000/tcp
+db         postgres:15-alpine            Up 15 seconds (healthy)           0.0.0.0:5433->5432/tcp
+frontend   nginx:1.27-alpine             Up 9 seconds                      0.0.0.0:8080->80/tcp
+
+$ ... exec db psql -c "\dt"
+               List of relations
+ Schema |    Name     | Type  |     Owner      
+--------+-------------+-------+----------------
+ public | audit_logs  | table | catalogue_user
+ public | categories  | table | catalogue_user
+ public | order_items | table | catalogue_user
+ public | orders      | table | catalogue_user
+ public | products    | table | catalogue_user
+ public | settings    | table | catalogue_user
+ public | users       | table | catalogue_user
+(7 rows)
+
+$ ... exec db psql -c "SELECT email, role, left(password_hash, 20) ..."
+        email        |   role   |     hash_prefix      
+---------------------+----------+----------------------
+ admin@example.local | admin    | pbkdf2_sha256$200000
+ staff@example.local | standard | pbkdf2_sha256$200000
+(2 rows)
+
+$ ... logs backend
+backend-1  | 2026-11-26 00:39:27,104 INFO auth: Demo password set for admin@example.local
+backend-1  | 2026-11-26 00:39:27,143 INFO auth: Demo password set for staff@example.local
+backend-1  | 2026-11-26 00:39:27,145 INFO main: Database is ready
+backend-1  | INFO:     Application startup complete.
