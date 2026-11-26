@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product details - Simple E-commerce Catalogue</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" data-store-name>Simple Catalogue Shop</a>
+      <nav class="main-nav">
+        <a href="index.html">Catalogue</a>
+        <a href="index.html#cart" class="cart-link">Cart <span class="badge" id="cart-count">0</span></a>
+        <a href="admin.html">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <p><a href="index.html" class="back-link">&larr; Back to catalogue</a></p>
+
+    <div id="product-message" class="message" hidden></div>
+
+    <!-- The product is rendered here by catalog.js (renderProductPage) -->
+    <article id="product-details" class="product-details" hidden></article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      Training project "1-7 Simple E-commerce Catalogue". Contact: <span data-contact-email></span>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/catalog.js"></script>
+</body>
+</html>

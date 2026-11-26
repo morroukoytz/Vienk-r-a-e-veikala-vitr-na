@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogue - Simple E-commerce Catalogue</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- ============ Header ============ -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" data-store-name>Simple Catalogue Shop</a>
+      <nav class="main-nav">
+        <a href="index.html" class="active">Catalogue</a>
+        <a href="#cart" class="cart-link">Cart <span class="badge" id="cart-count">0</span></a>
+        <a href="admin.html">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Product catalogue</h1>
+      <p>Browse the products, add them to the cart and send an order request.
+         <strong>No real payment is made</strong> - this is a training project.</p>
+    </section>
+
+    <div class="layout-with-sidebar">
+      <!-- ============ Catalogue ============ -->
+      <section aria-labelledby="catalogue-title">
+        <h2 id="catalogue-title" class="visually-hidden">Products</h2>
+
+        <!-- Search and filters -->
+        <form class="toolbar" id="filter-form" role="search" onsubmit="return false;">
+          <div class="form-row grow">
+            <label for="search-input">Search</label>
+            <input type="search" id="search-input" placeholder="Name, description or SKU" maxlength="100">
+          </div>
+          <div class="form-row">
+            <label for="category-select">Category</label>
+            <select id="category-select">
+              <option value="">All categories</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="sort-select">Sort by</label>
+            <select id="sort-select">
+              <option value="name">Name (A-Z)</option>
+              <option value="price_asc">Price: low to high</option>
+              <option value="price_desc">Price: high to low</option>
+              <option value="newest">Newest first</option>
+            </select>
+          </div>
+        </form>
+
+        <!-- Category "chips" for quick filtering -->
+        <div class="chips" id="category-chips"></div>
+
+        <p class="result-info" id="result-info"></p>
+        <div id="catalogue-message" class="message" hidden></div>
+
+        <!-- Product cards are inserted here by catalog.js -->
+        <div class="product-grid" id="product-grid"></div>
+      </section>
+
+      <!-- ============ Cart and checkout ============ -->
+      <aside class="sidebar" id="cart" aria-labelledby="cart-title">
+        <div class="card">
+          <h2 id="cart-title">Your cart</h2>
+          <div id="cart-items"></div>
+          <div class="cart-total">
+            <span>Total:</span>
+            <strong id="cart-total">0.00</strong>
+          </div>
+          <button type="button" class="btn btn-secondary btn-small" id="clear-cart-btn">Clear cart</button>
+        </div>
+
+        <div class="card">
+          <h2>Order request</h2>
+          <p class="hint">Fields marked with * are required. Use test data only.</p>
+          <div id="order-message" class="message" hidden></div>
+
+          <form id="order-form" novalidate>
+            <div class="form-row">
+              <label for="customer_name">Full name *</label>
+              <input id="customer_name" data-field="customer_name" maxlength="100" autocomplete="name">
+              <span class="field-error"></span>
+            </div>
+            <div class="form-row">
+              <label for="customer_email">E-mail *</label>
+              <input id="customer_email" data-field="customer_email" type="email" maxlength="150"
+                     placeholder="name@example.com" autocomplete="email">
+              <span class="field-error"></span>
+            </div>
+            <div class="form-row">
+              <label for="customer_phone">Phone</label>
+              <input id="customer_phone" data-field="customer_phone" maxlength="30" autocomplete="tel">
+              <span class="field-error"></span>
+            </div>
+            <div class="form-row">
+              <label for="shipping_address">Shipping address *</label>
+              <textarea id="shipping_address" data-field="shipping_address" rows="2" maxlength="300"></textarea>
+              <span class="field-error"></span>
+            </div>
+            <div class="form-row">
+              <label for="comment">Comment</label>
+              <textarea id="comment" data-field="comment" rows="2" maxlength="500"></textarea>
+              <span class="field-error"></span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="order-submit">Send order request</button>
+          </form>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      Training project "1-7 Simple E-commerce Catalogue". Contact: <span data-contact-email></span>
+    </div>
+  </footer>
+
+  <!-- Order of scripts matters: api.js provides helpers for the other files -->
+  <script src="js/api.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/catalog.js"></script>
+</body>
+</html>

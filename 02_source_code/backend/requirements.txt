@@ -1,0 +1,5 @@
+# Web framework and the server that runs it
+fastapi==0.115.6
+uvicorn==0.34.0
+# PostgreSQL driver (binary build = no compiler needed)
+psycopg[binary]==3.2.3
